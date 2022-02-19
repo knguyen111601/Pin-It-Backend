@@ -7,7 +7,8 @@ const dotenv = require("dotenv")
 
 // Controllers
 const UsersRouter = require("./controllers/Users")
-const AuthRouter = require("./controllers/Auth")
+const PinsRouter = require("./controllers/Pins")
+const CollectionsRouter = require("./controllers/Collections")
 
 // Middleware
 app.use(cors())
@@ -21,10 +22,14 @@ app.get("/", (req, res)=> {
     res.send("Hello World")
 })
 
-// Signup Router
+// Signup/Login Router
 app.use("/api/users", UsersRouter)
 
-// Login Router
-app.use("/api/auth", AuthRouter)
+// Pins Router
+app.use("/api/pins", PinsRouter)
+
+// Collections Router
+app.use("/api/collections", CollectionsRouter)
+
 
 app.listen(PORT, ()=>{console.log(`App listening on PORT ${PORT}`)})

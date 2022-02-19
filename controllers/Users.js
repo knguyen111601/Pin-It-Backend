@@ -2,7 +2,6 @@ const express = require("express")
 const pool = require("../db/db")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
-const authenticateToken = require("../middleware/authorization"); // verify logged in middleware
 const jwtMiddleware = require("../middleware/jwt")
 
 const router = express.Router()
