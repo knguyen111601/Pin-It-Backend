@@ -1,8 +1,16 @@
-POST http://localhost:3000/api/users
-Content-Type: application/json
+# POST http://localhost:3000/api/users
+# Content-Type: application/json
 
-{
-    "username": "Goop", 
-    "email": "goop@email.com",
-    "password": "goop"
-}
+# {
+#     "username": "Goop", 
+#     "email": "goop@email.com",
+#     "password": "goop"
+# }
+
+# GET http://localhost:3000/api/users
+# Content-Type: application/json
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJQbyIsImVtYWlsIjoiUG9AZW1haWwuY29tIiwicGZwIjoiaHR0cHM6Ly9pLmltZ3VyLmNvbS9pZ0Yya0hyLnBuZyIsImlhdCI6MTY0NTI2MDE1MSwiZXhwIjoxNjQ1MjYwMTcxfQ.K1dTJCclvZXLowHnUWC2I1znDGckvczso61Cl4PmPTw
+
+
+GET http://localhost:3000/api/auth/refresh_token
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJQbyIsImVtYWlsIjoiUG9AZW1haWwuY29tIiwicGZwIjoiaHR0cHM6Ly9pLmltZ3VyLmNvbS9pZ0Yya0hyLnBuZyIsImlhdCI6MTY0NTI2MDE1MSwiZXhwIjoxNjQ1MjYwMTcxfQ.K1dTJCclvZXLowHnUWC2I1znDGckvczso61Cl4PmPTw

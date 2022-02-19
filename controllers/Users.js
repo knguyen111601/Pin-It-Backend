@@ -1,12 +1,13 @@
 const express = require("express")
 const pool = require("../db/db")
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const authenticateToken = require("../middleware/authorization"); // verify logged in middleware
 
 const router = express.Router()
 
 
 // Index Route Show All Users
-router.get("/", async (req, res)=> {
+router.get("/", authenticateToken, async (req, res)=> {
     try {
         const users = await pool.query('SELECT * FROM users')
         res.json({users : users.rows})
