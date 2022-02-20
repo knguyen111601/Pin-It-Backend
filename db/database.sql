@@ -29,13 +29,19 @@ CREATE TABLE collections (
     user_username VARCHAR(500) NOT NULL 
 );
 
-CREATE TABLE pinned_pins (
+CREATE TABLE saved_pins (
     id SERIAL NOT NULL PRIMARY KEY,
     title VARCHAR(500) NOT NULL,
     description TEXT,
     image TEXT NOT NULL,
     user_id SERIAL NOT NULL REFERENCES users(id),
     original_post_id SERIAL NOT NULL REFERENCES pins(id)
+    collection_id SERIAL NOT NULL REFERENCES collections(id)
+);
+
+CREATE TABLE saved_pins (
+    id SERIAL NOT NULL PRIMARY KEY,
+    original_post_id INT,
     collection_id SERIAL NOT NULL REFERENCES collections(id)
 );
 

@@ -10,6 +10,7 @@ const UsersRouter = require("./controllers/Users")
 const PinsRouter = require("./controllers/Pins")
 const CollectionsRouter = require("./controllers/Collections")
 const HashtagsRouter = require("./controllers/Hashtags")
+const SavedPinsRouter = require("./controllers/SavedPins")
 
 // Middleware
 app.use(cors())
@@ -34,6 +35,9 @@ app.use("/api/collections", CollectionsRouter)
 
 // Hashtags Router 
 app.use("/api/hashtags", HashtagsRouter)
+
+// SavedPins Router
+app.use("/api/savedpins", SavedPinsRouter)
 
 
 app.listen(PORT, ()=>{console.log(`App listening on PORT ${PORT}`)})
