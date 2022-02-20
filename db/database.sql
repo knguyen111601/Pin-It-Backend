@@ -45,20 +45,20 @@ CREATE TABLE saved_pins (
 --     collection_id SERIAL NOT NULL REFERENCES collections(id)
 -- );
 
-INSERT INTO users (username, password, email) VALUES ('Goop', 'Goop', 'goop@email.com');
+-- INSERT INTO users (username, password, email) VALUES ('Goop', 'Goop', 'goop@email.com');
 
-ALTER TABLE users ALTER COLUMN username TYPE VARCHAR (500) NOT NULL;
+-- ALTER TABLE users ALTER COLUMN username TYPE VARCHAR (500) NOT NULL;
 
 
-INSERT INTO pins (title, description, image, user_id, user_username) VALUES ('First Pin', 'First Pin Desc', 'img', 1, 'goop');
+-- INSERT INTO pins (title, description, image, user_id, user_username) VALUES ('First Pin', 'First Pin Desc', 'img', 1, 'goop');
 
-INSERT INTO pins (title, description, image, user_id, user_username) VALUES ('Second Pin', 'Second Pin Desc', 'img', 2, 'buh');
+-- INSERT INTO pins (title, description, image, user_id, user_username) VALUES ('Second Pin', 'Second Pin Desc', 'img', 2, 'buh');
 
-UPDATE pins SET title = 'Update Multiple', description = 'Updated desc', img = '' WHERE id = 1;
+-- UPDATE pins SET title = 'Update Multiple', description = 'Updated desc', img = '' WHERE id = 1;
 
-INSERT INTO collections (title, description, user_id, user_username) VALUES ('First Collection', 'First collections desc', 1, 'goop');
+-- INSERT INTO collections (title, description, user_id, user_username) VALUES ('First Collection', 'First collections desc', 1, 'goop');
 
-INSERT INTO hashtags (tag, pin_id) VALUES ('hashtag', 1);
+-- INSERT INTO hashtags (tag, pin_id) VALUES ('hashtag', 1);
 
 
 -- INSERT INTO saved_pins (title, description, image, original_post_id, collection_id) VALUES ('Second Pin')
