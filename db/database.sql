@@ -51,3 +51,5 @@ INSERT INTO pins (title, description, image, user_id, user_username) VALUES ('Se
 UPDATE pins SET title = 'Update Multiple', description = 'Updated desc', img = '' WHERE id = 1;
 
 INSERT INTO collections (title, description, user_id, user_username) VALUES ('First Collection', 'First collections desc', 1, 'goop');
+
+INSERT INTO hashtags (tag, pin_id) VALUES ('hashtag', 1);

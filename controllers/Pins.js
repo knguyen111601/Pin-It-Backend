@@ -64,5 +64,23 @@ router.delete("/:id", jwtMiddleware, async (req, res) => {
     }
 })
 
+// PIN SEARCH BY TITLE FUNCTION
+router.post("/search", async (req, res) => {
+    try {
+        const {term} = req.body
+        const pinsWithTerm = await pool.query("SELECT * FROM pins WHERE LOWER(title) LIKE " + "'" + "%" + `${term.toLowerCase()}` + "%" + "'")
+
+        if (pinsWithTerm.rows.length > 0) {
+            res.json(pinsWithTerm.rows)
+        } else {
+            res.json({found: false})
+        }
+    } catch (err) {
+        res.status(500).json({err: err.message})
+    }
+})
+
+
+
 // Export Router
 module.exports = router
