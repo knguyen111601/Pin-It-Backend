@@ -35,15 +35,15 @@ CREATE TABLE saved_pins (
     description TEXT,
     image TEXT NOT NULL,
     user_id SERIAL NOT NULL REFERENCES users(id),
-    original_post_id SERIAL NOT NULL REFERENCES pins(id)
-    collection_id SERIAL NOT NULL REFERENCES collections(id)
-);
-
-CREATE TABLE saved_pins (
-    id SERIAL NOT NULL PRIMARY KEY,
     original_post_id INT,
     collection_id SERIAL NOT NULL REFERENCES collections(id)
 );
+
+-- CREATE TABLE saved_pins (
+--     id SERIAL NOT NULL PRIMARY KEY,
+--     original_post_id INT,
+--     collection_id SERIAL NOT NULL REFERENCES collections(id)
+-- );
 
 INSERT INTO users (username, password, email) VALUES ('Goop', 'Goop', 'goop@email.com');
 
@@ -59,3 +59,6 @@ UPDATE pins SET title = 'Update Multiple', description = 'Updated desc', img = '
 INSERT INTO collections (title, description, user_id, user_username) VALUES ('First Collection', 'First collections desc', 1, 'goop');
 
 INSERT INTO hashtags (tag, pin_id) VALUES ('hashtag', 1);
+
+
+-- INSERT INTO saved_pins (title, description, image, original_post_id, collection_id) VALUES ('Second Pin')

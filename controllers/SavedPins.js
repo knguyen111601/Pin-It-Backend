@@ -3,11 +3,10 @@ const pool = require("../db/db")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 const jwtMiddleware = require("../middleware/jwt");
-const { set } = require("lodash");
 
 const router = express.Router()
 
-// Add Pin to Collection 
+// Get all pins
 router.get("/", async (req, res) => {
     try {
         const allSavedPins = await pool.query('SELECT * FROM saved_pins')
@@ -17,46 +16,74 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.post("/", async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
-        const {original_post_id, collection_id} = req.body
-        const savePin = await pool.query('INSERT INTO saved_pins (original_post_id, collection_id) VALUES ($1, $2)RETURNING *', [original_post_id, collection_id])
-        res.json(savePin.rows[0])
-    } catch (err) {
-        res.status.json({err: err.message})
-    }
-})
 
-// Show all original pins when viewing collection
-router.get("/og", async (req, res) => {
-    try {
-        const {collection_id} = req.body
-        const grabPinIds = await pool.query('SELECT * FROM saved_pins WHERE collection_id=$1',[collection_id])
-        if (grabPinIds.rows.length > 0) {
-            const ids = []
-            for (item of grabPinIds.rows) {
-                ids.push(item.original_post_id)
-            }
-
-            const match = []
-            for (item of ids) {
-                const pins = await pool.query('SELECT * FROM pins WHERE id=$1', [item])
-                match.push(pins.rows[0])
-            }
-            // Removes duplicate objects
-            for (let i = 0; i < match.length; i++) {
-                for (let j = i+1; j < match.length; j++) {
-                    if (match[i].id == match[j].id) {
-                        match.splice(j,1)
-                    }
-                }
-            }
-            res.json(match)
-        }
     } catch (err) {
         res.status(500).json({err: err.message})
     }
 })
+
+// Creates a saved pin to a collection 
+router.post("/", async (req, res) => {
+    try {
+        const {original_post_id, collection_id, user_id} = req.body
+
+        const og_post = await pool.query('SELECT * FROM pins WHERE id=$1', [original_post_id])
+
+        const {title, description, image, id} = og_post.rows[0]
+
+        const postToCollection = await pool.query('INSERT INTO saved_pins (title, description, image, user_id, original_post_id, collection_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [title, description, image, user_id, id, collection_id])
+
+        res.json(postToCollection.rows[0])
+
+    } catch (err) {
+        res.status(500).json({err: err.message})
+    }
+})
+
+// Delete a pinned item 
+router.delete("/:id", async (req, res) => {
+    try {
+        const {id} = req.params
+        const savedPin = await pool.query('SELECT * FROM saved_pins WHERE id=$1', [id])
+        const deleteSavedPin = await pool.query('DELETE FROM saved_pins WHERE id=$1', [id])
+        res.json(savedPin.rows[0])
+    } catch (err) {
+        res.status(500).json({err: err.message})
+    }
+})
+
+// Show all original pins when viewing collection
+// router.get("/og", async (req, res) => {
+//     try {
+//         const {collection_id} = req.body
+//         const grabPinIds = await pool.query('SELECT * FROM saved_pins WHERE collection_id=$1',[collection_id])
+//         if (grabPinIds.rows.length > 0) {
+//             const ids = []
+//             for (item of grabPinIds.rows) {
+//                 ids.push(item.original_post_id)
+//             }
+
+//             const match = []
+//             for (item of ids) {
+//                 const pins = await pool.query('SELECT * FROM pins WHERE id=$1', [item])
+//                 match.push(pins.rows[0])
+//             }
+//             // Removes duplicate objects
+//             for (let i = 0; i < match.length; i++) {
+//                 for (let j = i+1; j < match.length; j++) {
+//                     if (match[i].id == match[j].id) {
+//                         match.splice(j,1)
+//                     }
+//                 }
+//             }
+//             res.json(match)
+//         }
+//     } catch (err) {
+//         res.status(500).json({err: err.message})
+//     }
+// })
 
 
 
