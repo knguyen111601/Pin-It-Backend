@@ -28,6 +28,18 @@ router.post("/signup", async (req, res) => {
     }
 })
 
+// Edit Profile Picture
+router.put("/:id", async (req, res) => {
+    try {
+        const {id} = req.params
+        const {pfp} = req.body
+        const update = await pool.query('UPDATE users SET pfp=$1 WHERE id=$2 RETURNING *', [pfp, id])
+        res.json(update.rows[0])
+    } catch (err) {
+        res.status(500).json({err: err.message})
+    }
+})
+
 router.post("/login", async (req, res) => {
     try {
         // USERNAME CHECK
