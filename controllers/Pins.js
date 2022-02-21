@@ -21,8 +21,8 @@ router.get("/", async (req, res) => {
 // Create Route Post Pin
 router.post("/", jwtMiddleware, async (req, res) => {
     try {
-        const {title, description, image, user_id, user_username} = req.body
-        const postPin = await pool.query('INSERT INTO pins (title, description, image, user_id, user_username) VALUES ($1, $2, $3, $4, $5) RETURNING *', [title, description, image, user_id, user_username])
+        const {title, description, image, user_id, user_username, user_pfp} = req.body
+        const postPin = await pool.query('INSERT INTO pins (title, description, image, user_id, user_username, user_pfp) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *', [title, description, image, user_id, user_username, user_pfp])
         res.json(postPin.rows[0])
     } catch (err) {
         res.status(500).json({err: err.message})
