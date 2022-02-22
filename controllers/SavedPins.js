@@ -54,6 +54,16 @@ router.delete("/:id", async (req, res) => {
     }
 })
 
+router.get("/collections/:collectionid", async (req, res)=> {
+    try {
+        const {collectionid} = req.params
+        const allPins = await pool.query('SELECT * FROM saved_pins WHERE collection_id=$1', [collectionid])
+        res.json(allPins.rows)
+    } catch (err) {
+        res.status(500).json({err:err.message})
+    }
+})
+
 // Show all original pins when viewing collection
 // router.get("/og", async (req, res) => {
 //     try {
