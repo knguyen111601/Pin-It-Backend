@@ -13,6 +13,7 @@ CREATE TABLE pins (
     image TEXT NOT NULL,
     user_id SERIAL NOT NULL REFERENCES users(id),
     user_username VARCHAR(500) NOT NULL
+    user_pfp TEXT NOT NULL DEFAULT 'https://i.imgur.com/igF2kHr.png'
 );
 
 CREATE TABLE hashtags (
