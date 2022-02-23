@@ -12,6 +12,27 @@ Pin-It is a web application in which users can let their imagination and passion
 4. SQL
 5. bcrypt
 
+## Instructions
+In order to run the API locally, you will need to develop .env file with a SECRET like so:
+1. in ./env
+   ```sh
+   SECRET=XXXXX
+   ```
+   My method of developing a secret is through a library that returns encoded strings.
+
+2. Install dependencies (in terminal)
+   ```sh
+   npm install
+   ```
+3. Run server
+   ```sh
+   nodemon server.js
+   ```
+4. Visit endpoints
+   ```sh
+   http://localhost:3000/XXXXX
+   ```
+
 ## Models
 Models I will have in my app are:
 
