@@ -32,8 +32,8 @@ router.post("/signup", async (req, res) => {
 router.put("/:id", async (req, res) => {
     try {
         const {id} = req.params
-        const {pfp} = req.body
-        const update = await pool.query('UPDATE users SET pfp=$1 WHERE id=$2 RETURNING *', [pfp, id])
+        const {pfp, username} = req.body
+        const update = await pool.query('UPDATE users SET pfp=$1, username=$2 WHERE id=$3 RETURNING *', [pfp, username, id])
         res.json(update.rows[0])
     } catch (err) {
         res.status(500).json({err: err.message})
