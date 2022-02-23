@@ -31,9 +31,9 @@ router.post("/", async (req, res) => {
 
         const og_post = await pool.query('SELECT * FROM pins WHERE id=$1', [original_post_id])
         console.log(og_post.rows[0])
-        const {title, description, image, id, user_pfp} = og_post.rows[0]
+        const {title, description, image, id, user_pfp, username} = og_post.rows[0]
 
-        const postToCollection = await pool.query('INSERT INTO saved_pins (title, description, image, user_id, original_post_id, collection_id, user_pfp) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [title, description, image, user_id, id, collection_id, user_pfp])
+        const postToCollection = await pool.query('INSERT INTO saved_pins (title, description, image, user_id, original_post_id, collection_id, user_pfp, user_username) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [title, description, image, user_id, id, collection_id, user_pfp, username])
 
         res.json(postToCollection.rows[0])
 

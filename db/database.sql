@@ -63,3 +63,6 @@ CREATE TABLE saved_pins (
 
 
 -- INSERT INTO saved_pins (title, description, image, original_post_id, collection_id) VALUES ('Second Pin')
+
+-- ALTER TABLE saved_pins ADD user_username VARCHAR(500) NOT NULL;
+
